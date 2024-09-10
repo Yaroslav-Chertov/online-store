@@ -1,4 +1,5 @@
 const propNames = new Set(['id', 'className', 'textContent', 'onclick']);
+let id = 1;
 
 /**
  * Создание элемента со свойствами и вложенными элементами
@@ -26,3 +27,17 @@ export function createElement(name, props = {}, ...children) {
 
   return element;
 }
+
+export function getWordForCount(count) {
+  if (count % 10 === 1 && count % 100 !== 11) {
+    return 'раз';
+  } else if ((count % 10 >= 2 && count % 10 <= 4) && (count % 100 < 12 || count % 100 > 14)) {
+    return 'раза';
+  } else {
+    return 'раз';
+  }
+};
+
+export const generateNumbers = () => {
+  return id++;
+};

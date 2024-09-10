@@ -1,6 +1,7 @@
 import React from 'react';
-import { createElement } from './utils.js';
 import './styles.css';
+import { createElement } from './utils.js';
+import { getWordForCount } from "./utils.js";
 
 /**
  * Приложение
@@ -27,7 +28,9 @@ function App({ store }) {
                 onClick={() => store.selectItem(item.code)}
               >
                 <div className="Item-code">{item.code}</div>
-                <div className="Item-title">{item.title}</div>
+                <div className="Item-title">
+                  {item.title} {item.countSelected && ` | Выделяли ${item.countSelected} ${getWordForCount(item.countSelected)}`}
+                </div>
                 <div className="Item-actions">
                   <button onClick={() => store.deleteItem(item.code)}>Удалить</button>
                 </div>
