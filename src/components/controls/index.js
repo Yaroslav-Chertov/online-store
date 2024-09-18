@@ -1,21 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
+import BasketStatus from "../basket-status";
 
-function Controls({ onAdd }) {
+function Controls({ onAdd = () => { }, sum, amount }) {
   return (
     <div className="Controls">
-      <button onClick={() => onAdd()}>Добавить</button>
+      <BasketStatus sum={sum} amount={amount} />
+      <button className='Controls-button' onClick={() => onAdd()}>Перейти</button>
     </div>
   );
 }
 
 Controls.propTypes = {
   onAdd: PropTypes.func,
-};
-
-Controls.defaultProps = {
-  onAdd: () => {},
 };
 
 export default React.memo(Controls);
