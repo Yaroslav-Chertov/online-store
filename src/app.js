@@ -5,6 +5,8 @@ import Head from './components/head';
 import PageLayout from './components/page-layout';
 import ModalLayout from './components/modal-layout';
 import Item from './components/item';
+import itemBasket from "./components/item-basket";
+import ItemBasket from "./components/item-basket";
 
 /**
  * Приложение
@@ -37,16 +39,24 @@ function App({ store }) {
     }, [store]),
   };
 
+  const renderItem = useCallback((item) => {
+    return <Item item={item} onAddItemBasket={callbacks.addItemBasket} />
+  }, [callbacks.addItemBasket])
+
+  const renderItemBasket = useCallback((itemBasket) => {
+    return <ItemBasket item={itemBasket} onDelete={callbacks.deleteItemBasket} />
+  }, [callbacks.deleteItemBasket])
+
   return (
     <>
       <PageLayout>
         <Head title="Магазин" />
         <Controls onAdd={callbacks.showModal} sum={state.basket.total} amount={state.basket.amount} />
-        <List type={'Item'} list={list} onAddItemBasket={callbacks.addItemBasket} />
+        <List list={list} render={renderItem} />
       </PageLayout>
       {showModal &&
         <ModalLayout onClose={callbacks.closeModal} sum={state.basket.total}>
-          <List type={'ItemBasket'} list={items} onDeleteItem={callbacks.deleteItemBasket} />
+          <List list={items} render={renderItemBasket} />
         </ModalLayout>}
     </>
   );

@@ -2,6 +2,7 @@ import { cn as bem } from "@bem-react/classname";
 import PropTypes from "prop-types";
 import React from "react";
 import './style.css';
+import { numberFormat } from "../../utils";
 
 function ModalLayout({ children, onClose = () => { }, sum = 0 }) {
   const cn = bem('ModalLayout');
@@ -18,7 +19,7 @@ function ModalLayout({ children, onClose = () => { }, sum = 0 }) {
         </div>
         <div className={cn('footer')}>
           <span>Итого</span>
-          <span>{new Intl.NumberFormat('ru-RU').format(sum)}&nbsp;₽</span>
+          <span>{numberFormat(sum)}&nbsp;₽</span>
         </div>
       </div>
     </div>
