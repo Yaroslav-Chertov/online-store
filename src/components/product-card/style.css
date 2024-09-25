@@ -1,0 +1,23 @@
+.ProductCard {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.ProductCard-line span {
+  font-weight: bold;
+}
+
+.ProductCard-price {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.ProductCard-btn {
+  padding: 3px 9px;
+  font-size: 13px;
+  max-width: 76px;
+}

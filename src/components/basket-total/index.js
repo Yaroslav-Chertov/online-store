@@ -17,10 +17,6 @@ function BasketTotal({ sum }) {
 
 BasketTotal.propTypes = {
   sum: PropTypes.number,
-};
-
-BasketTotal.defaultProps = {
-  sum: 0,
-};
+}
 
 export default memo(BasketTotal);
