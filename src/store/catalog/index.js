@@ -13,12 +13,17 @@ class Catalog extends StoreModule {
       list: [],
       totalCount: 0,
       activePage: 1,
+      isLoading: false,
     };
-  }
+  };
 
   async load(page = 1) {
     const skip = (page - 1) * LIMIT;
 
+    this.setState({
+      ...this.getState(),
+      isLoading: true,
+    })
     const response = await fetch(`/api/v1/articles?limit=${LIMIT}&skip=${skip}&fields=items(_id, title, price),count`);
     const json = await response.json();
     this.setState(
@@ -27,10 +32,11 @@ class Catalog extends StoreModule {
         list: json.result.items,
         totalCount: json.result.count,
         activePage: page,
+        isLoading: false,
       },
       'Загружены товары из АПИ',
     );
   }
-}
+};
 
 export default Catalog;

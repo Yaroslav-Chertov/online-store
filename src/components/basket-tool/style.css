@@ -1,9 +1,6 @@
 /* Контрол с общими действиями */
 .BasketTool {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  font-size: 18px;
+
 }
 
 .BasketTool-label {
@@ -13,12 +10,4 @@
 .BasketTool-total {
   font-weight: bold;
   margin: 0 20px;
-}
-
-.BasketTool-link {
-  color: #0087e9;
-}
-
-.BasketTool-link:visited {
-  color: #0087e9;
 }

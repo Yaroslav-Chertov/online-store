@@ -29,6 +29,7 @@ function Basket() {
           item={item}
           onRemove={callbacks.removeFromBasket}
           onClickLink={callbacks.closeModal}
+          link={`/product/${item._id}`}
         />;
       },
       [callbacks.removeFromBasket],
@@ -41,6 +42,6 @@ function Basket() {
       <BasketTotal sum={select.sum} />
     </ModalLayout>
   );
-}
+};
 
 export default memo(Basket);

@@ -16,7 +16,7 @@ function Item(props) {
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
       <div className={cn('title')}>
-        <Link className={cn('link')} to={`/product/${props.item._id}`}>{props.item.title}</Link>
+        <Link className={cn('link')} to={props.link}>{props.item.title}</Link>
       </div>
       <div className={cn('actions')}>
         <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>
@@ -24,7 +24,7 @@ function Item(props) {
       </div>
     </div>
   );
-}
+};
 
 Item.propTypes = {
   item: PropTypes.shape({

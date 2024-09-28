@@ -1,5 +1,5 @@
 .Pagination {
-  padding: 22px 21px ;
+  padding: 22px 21px;
 }
 
 .Pagination-list {
@@ -16,6 +16,7 @@
   color: #000;
   min-width: 20px;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .Pagination-item_dots {
