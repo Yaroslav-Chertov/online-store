@@ -1,0 +1,13 @@
+.AuthInfo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px 20px;
+  gap: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.AuthInfo a, .AuthInfo a:visited {
+  color: #0087e9;
+  font-size: 13px;
+}

@@ -32,4 +32,28 @@ export function codeGenerator(start = 0) {
  */
 export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
+};
+
+export function getHierarchy(list) {
+
+  const map = {};
+
+  list.forEach(item => {
+    map[item._id] = { value: item._id, title: item.title, depth: 0 };
+  });
+
+  const result = [];
+
+  function addItemToResult(item, depth) {
+    const indent = '- '.repeat(depth);
+    result.push({ value: item.value, title: `${indent}${item.title}` });
+
+    const children = list.filter(child => child.parent && child.parent._id === item.value);
+    children.forEach(child => addItemToResult(map[child._id], depth + 1));
+  };
+
+  const rootItems = list.filter(item => !item.parent);
+  rootItems.forEach(item => addItemToResult(map[item._id], 0));
+
+  return result;
 }
