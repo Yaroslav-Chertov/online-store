@@ -1,4 +1,4 @@
-# Компоненты
+# Логика приложения
 
 [Ссылка на Макет в Figma](https://www.figma.com/file/lZ0UqAE2M9hIDxqNFtD8Ta/YLAB-webinar---TASK4?type=design&node-id=0%3A1&t=nIAUIwS0hoMARgQS-1)
 
