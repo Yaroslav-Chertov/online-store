@@ -1,7 +1,7 @@
 import StoreModule from '../module';
 
 /**
- * Детальная информация о товаре для страницы товара
+ * Детальная информация о пользователе для страницы profile
  */
 class ProfileState extends StoreModule {
   initState() {
@@ -12,7 +12,7 @@ class ProfileState extends StoreModule {
   };
 
   async load() {
-    // Сброс текущего товара и установка признака ожидания загрузки
+    // Сброс текущего пользователя и установка признака ожидания загрузки
     this.setState({
       data: {},
       waiting: true,

@@ -7,10 +7,6 @@ class CategoriesState extends StoreModule {
     };
   };
 
-  /**
-   * Установка кода языка (локали)
-   * @param lang
-   */
   async load() {
 
     const res = await fetch('/api/v1/categories?fields=_id,title,parent(_id)&limit=*');
