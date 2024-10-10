@@ -1,4 +1,4 @@
-# Логика приложения
+# Сервисы
 
 [Ссылка на Макет в Figma](https://www.figma.com/file/zlt4bp3VfyaSUTf1qbMLn0/YLAB-webinar---TASK5?type=design&node-id=0%3A1&t=QzhP1Ra2i0XTkiRB-1)
 
