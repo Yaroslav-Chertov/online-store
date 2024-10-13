@@ -1,9 +1,10 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { useDispatch, useSelector as useSelectorRedux } from 'react-redux';
 import shallowequal from 'shallowequal';
 import useTranslate from '../../hooks/use-translate';
 import CommentsLayout from '../../components/comments-layout';
 import listToTree from '../../utils/list-to-tree';
+import treeToList from '../../utils/tree-to-list';
 import useSelector from '../../hooks/use-selector';
 import CommentForm from '../../components/comment-form';
 import formsActions from '../../store-redux/forms/actions';
@@ -17,26 +18,29 @@ function Comments() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const [activeCommentId, setActiveCommentId] = useState('');
 
   const selectRedux = useSelectorRedux(state => ({
     comments: state.comments.comments,
     count: state.comments.count,
     articleId: state.article.data._id,
     activeRootId: state.comments.activeIdComment,
-    currentId: state.comments.currentId,
-    userAnswer: state.comments.userName,
     form: state.forms.name,
   }), shallowequal);
 
   const select = useSelector(state => ({
     exists: state.session.exists,
+    userId: state.session.user._id,
   }));
 
-  const commentsRoots = listToTree([{ _id: selectRedux.articleId, parent: null }, ...selectRedux.comments])
+  const commentsRoots = listToTree([{ _id: selectRedux.articleId, parent: null }, ...selectRedux.comments]);
+  const commentList = treeToList(commentsRoots, (item, level) => ({ ...item, level }));
+  commentList.shift();
+  console.log('Comments commentList', commentList);
 
   const callbacks = {
-    openAnswerForm: useCallback((name, activeId, currentId, userName) => {
-      dispatch(commentsActions.setActiveIdComment(activeId, currentId, userName))
+    openAnswerForm: useCallback((name, activeId) => {
+      setActiveCommentId(activeId)
       dispatch(formsActions.open(name))
     }, []),
 
@@ -62,21 +66,19 @@ function Comments() {
 
   return (
     <CommentsLayout t={t} countComments={selectRedux.count}>
-      {commentsRoots[0].children.map(root => (
-        <RootComments
-          key={root._id}
-          rootId={selectRedux.activeRootId}
-          currentId={selectRedux.currentId}
-          root={root}
-          existsSession={select.exists}
-          openAnswerForm={callbacks.openAnswerForm}
-          onHideAnswerForm={callbacks.onHideAnswerForm}
-          formName={selectRedux.form}
-          onSignIn={callbacks.onSignIn}
-          onComment={callbacks.onComment}
-          userAnswer={selectRedux.userAnswer}
-          t={t}
-        />))}
+      <RootComments
+        comments={commentList}
+        activeCommentId={activeCommentId}
+        currentId={activeCommentId}
+        userId={select.userId}
+        existsSession={select.exists}
+        openAnswerForm={callbacks.openAnswerForm}
+        onHideAnswerForm={callbacks.onHideAnswerForm}
+        formName={selectRedux.form}
+        onSignIn={callbacks.onSignIn}
+        onComment={callbacks.onComment}
+        t={t}
+      />
       {selectRedux.form === 'comment' &&
         <CommentForm
           existsSession={select.exists}
@@ -89,4 +91,4 @@ function Comments() {
   )
 };
 
-export default memo(Comments)
+export default memo(Comments);

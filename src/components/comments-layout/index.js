@@ -8,7 +8,7 @@ function CommentsLayout({ children, countComments, t }) {
       <span>{`${t('comment.comments')} (${countComments})`}</span>
       {children}
     </div>
-  );
+  )
 };
 
 CommentsLayout.propTypes = {

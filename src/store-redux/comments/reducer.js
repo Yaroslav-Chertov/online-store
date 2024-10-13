@@ -2,8 +2,6 @@ export const initialState = {
   comments: [],
   count: 0,
   activeIdComment: null,
-  currentId: null,
-  userName: '',
   waiting: false, // признак ожидания загрузки
 };
 
@@ -24,21 +22,13 @@ function reducer(state = initialState, action) {
         comments: [...state.comments, action.payload],
         count: state.count + 1,
         activeIdComment: null,
-        currentId: null,
         waiting: false
       };
 
-    case 'comments/setActiveIdComment':
-      return {
-        ...state,
-        activeIdComment: action.payload.id,
-        currentId: action.payload.currentId,
-        userName: action.payload.userName,
-      }
     default:
       // Нет изменений
       return state;
-  };
+  }
 };
 
 export default reducer;

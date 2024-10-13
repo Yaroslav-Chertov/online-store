@@ -3,30 +3,43 @@ import './style.css';
 import { cn as bem } from '@bem-react/classname';
 import { formatDate } from '../../utils/date-format';
 import PropTypes from 'prop-types';
+import AnswerForm from '../answer-form';
 
-function ItemComment({ commentInfo, rootId, openAnswerForm, t }) {
+function ItemComment({ existsSession, onHideAnswerForm, onComment, onSignIn, lastChildId, commentInfo, formName, openAnswerForm, currentId, userId, t }) {
 
   const cn = bem('ItemComment');
-  const gap = (commentInfo.level + 1) * 30;
+  const MAX_LEVEL = 5;
+  const GAP = 30;
 
   return (
     <>
-      <div className={cn()}
-        style={{ marginLeft: `${gap}px` }}
+      <li className={cn()}
+        style={{ marginLeft: `${(commentInfo.level <= MAX_LEVEL ? commentInfo.level : MAX_LEVEL) * GAP}px` }}
       >
         <div className={cn('info')}>
-          <span className={cn('userName')}>{commentInfo?.author?.profile?.name}</span>
+          <span className={cn('userName', { 'auth': userId === commentInfo.author._id })}>{commentInfo?.author?.profile?.name}</span>
           <span className={cn('userDate')}>{formatDate(commentInfo?.dateCreate)}</span>
         </div>
         <div className={cn('text')}>{commentInfo?.text}</div>
         <div className={cn('answer')}>
           <button className={cn('btn')}
-            onClick={() => openAnswerForm('answer', rootId, commentInfo._id, commentInfo?.author?.profile?.name)}
+            onClick={() => openAnswerForm('answer', commentInfo._id)}
           >
             {t('comments.answer')}
           </button>
         </div>
-      </div>
+        {
+          formName === 'answer' && lastChildId === commentInfo._id &&
+          <AnswerForm
+            existsSession={existsSession}
+            onSignIn={onSignIn}
+            onHideAnswerForm={onHideAnswerForm}
+            onComment={onComment}
+            currentId={currentId}
+            t={t}
+          />
+        }
+      </li>
     </>
   )
 };
@@ -38,7 +51,14 @@ ItemComment.propTypes = {
     text: PropTypes.string,
     _id: PropTypes.string,
   }),
-  rootId: PropTypes.string,
+  existsSession: PropTypes.bool,
+  onHideAnswerForm: PropTypes.func,
+  onComment: PropTypes.func,
+  onSignIn: PropTypes.func,
+  lastChildId: PropTypes.string,
+  formName: PropTypes.string,
+  currentId: PropTypes.string,
+  userId: PropTypes.string,
   openAnswerForm: PropTypes.func,
   t: PropTypes.func
 };

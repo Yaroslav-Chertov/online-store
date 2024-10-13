@@ -33,7 +33,7 @@ export default {
       try {
         const res = await services.api.request({
           url: `/api/v1/comments?fields=_id,text,dateCreate,author(profile(name)),parent(_id,_type)`,
-          method: "POST",
+          method: 'POST',
           body: JSON.stringify(data)
         });
         // комментарии добавлен успешно
@@ -46,7 +46,4 @@ export default {
     };
   },
 
-  setActiveIdComment: (id, currentId, userName) => {
-    return { type: 'comments/setActiveIdComment', payload: { id, currentId, userName } }
-  }
 };

@@ -24,7 +24,7 @@ function CommentForm({ existsSession, onSignIn, onComment, t }) {
             <h3 className={cn('title')}>{t('comments.newComment')}</h3>
             <textarea
               className={cn('textarea')}
-              placeholder={'Текст'}
+              rows="5"
               value={text}
               onChange={(e) => handelChange(e.target.value)}
             />
