@@ -14,7 +14,7 @@ function ItemComment({ existsSession, onHideAnswerForm, onComment, onSignIn, las
   return (
     <>
       <li className={cn()}
-        style={{ marginLeft: `${(commentInfo.level <= MAX_LEVEL ? commentInfo.level : MAX_LEVEL) * GAP}px` }}
+        style={{ marginLeft: `${commentInfo.level === 1 ? 0 : (commentInfo.level <= MAX_LEVEL ? commentInfo.level : MAX_LEVEL) * GAP}px` }}
       >
         <div className={cn('info')}>
           <span className={cn('userName', { 'auth': userId === commentInfo.author._id })}>{commentInfo?.author?.profile?.name}</span>
